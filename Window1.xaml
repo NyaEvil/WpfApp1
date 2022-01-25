@@ -1,0 +1,14 @@
+﻿<Window x:Name="er_name" x:Class="WpfApp1.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1"
+        mc:Ignorable="d"
+        Title="Window1" Height="127.797" Width="400" VerticalAlignment="Center" HorizontalAlignment="Center">
+    <Grid>
+        <Label Content="Имя сервера уже занято!" HorizontalAlignment="Left" VerticalAlignment="Top" Height="49" Width="392" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Button Content="Понятно" HorizontalAlignment="Center" Height="33" VerticalAlignment="Bottom" Width="170" Margin="111,0,111,10" Click="Button_Click"/>
+
+    </Grid>
+</Window>
