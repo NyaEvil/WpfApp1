@@ -147,11 +147,14 @@ namespace WpfApp1
             t_class1.Visibility = Visibility.Collapsed;
             start.Visibility = Visibility.Collapsed;
             chat.Visibility = Visibility.Visible;
+            t_chat.Visibility = Visibility.Visible;
             plars.Visibility = Visibility.Visible;
             name_sh.Content = nm;
             class_sh.Content = cls;
             name_sh.Visibility = Visibility.Visible;
             class_sh.Visibility = Visibility.Visible;
+            hit.Visibility = Visibility.Visible;
+            def.Visibility = Visibility.Visible;
             Thread th = new Thread(() => chk());
             th.Start();
         }
@@ -300,6 +303,16 @@ namespace WpfApp1
                 this.Close();
                 con.Close();
             }
+        }
+
+        private void hit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void def_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
