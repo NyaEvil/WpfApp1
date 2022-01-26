@@ -71,11 +71,11 @@
                     <ListView x:Name="plars" HorizontalAlignment="Left" Height="261" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Visibility="Hidden" >
                         
                     </ListView>
-                    <ListView x:Name="chat" HorizontalAlignment="Left" Height="225" Margin="62,179,0,0" VerticalAlignment="Top" Width="226" Grid.Column="2" Grid.RowSpan="3" Visibility="Visible">
+                    <ListView x:Name="chat" HorizontalAlignment="Left" Height="225" Margin="50,179,10,0" VerticalAlignment="Top" Width="240" Grid.Column="2" Grid.RowSpan="3" Visibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                     </ListView>
                     <Label x:Name="name_sh" Content="Label" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Height="28" Width="190" Visibility="Hidden"/>
                     <Label x:Name="class_sh" Content="Label" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Height="28" Width="190" Margin="55,38,54,0" Visibility="Hidden"/>
-                    <TextBox x:Name="t_chat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="226" Grid.Column="2" Margin="62,42,0,0" Grid.Row="2" KeyDown="t_chat_KeyDown"/>
+                    <TextBox x:Name="t_chat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="240" Grid.Column="2" Margin="50,42,10,0" Grid.Row="2" KeyDown="t_chat_KeyDown"/>
                 </Grid>
             </TabItem>
         </TabControl>
