@@ -75,7 +75,10 @@ namespace WpfApp1
                 crt = $"INSERT INTO crt (g_name, g_pass) VALUES ('{nm}', '{pasw}')";
                 com = new MySqlCommand(crt, con);
                 com.ExecuteNonQuery();
-                crt = $"CREATE TABLE {nm} (id INTEGER AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, hp INTEGER, mana INTEGER, str INTEGER, skill TEXT, mess TEXT, PRIMARY KEY(id))";
+                crt = $"CREATE TABLE {nm} (id INTEGER AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, hp INTEGER, mana INTEGER, str INTEGER, skill TEXT, PRIMARY KEY(id))";
+                com = new MySqlCommand(crt, con);
+                com.ExecuteNonQuery();
+                crt = $"CREATE TABLE {nm}_chat (id INTEGER AUTO_INCREMENT, mess VARCHAR(255), PRIMARY KEY(id))";
                 com = new MySqlCommand(crt, con);
                 com.ExecuteNonQuery();
                 tb1.SelectedItem = w_game;
@@ -91,8 +94,10 @@ namespace WpfApp1
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            var path = System.IO.Path.GetDirectoryName(location);
-            string[] alf = Directory.GetFiles($"{path}/Toads");
+            var path = System.IO.Path.GetFullPath(location);
+            var path2 = System.IO.Path.Combine(path, "..\\..\\..\\.");
+            string parentDirectory = System.IO.Path.GetDirectoryName(path2);
+             string[] alf = Directory.GetFiles($"{parentDirectory}/Toads");
             try
             {
                 i++;
@@ -131,7 +136,7 @@ namespace WpfApp1
             string cls = t_class1.SelectionBoxItem.ToString();
             Toad you = new Toad(cls);
 
-            string cm = $"INSERT INTO {t} (name, hp, mana, str, skill, mess) VALUES ('{nm}', {you.hp}, {you.mana}, {you.str}, '{you.skill}', ' ')";
+            string cm = $"INSERT INTO {t} (name, hp, mana, str, skill) VALUES ('{nm}', {you.hp}, {you.mana}, {you.str}, '{you.skill}')";
             MySqlCommand com = new MySqlCommand(cm, con);
             com.ExecuteNonQuery();
             PREV.Visibility = Visibility.Collapsed;
@@ -231,17 +236,15 @@ namespace WpfApp1
                 this.Dispatcher.Invoke((Action)(() =>
                 {
                     chat.Items.Add(text);
-                    if (chat.Items.Count > 14)
-                    {
-                        chat.Items.RemoveAt(0);
-                    }
                 }));
                 MySqlConnection cons = new MySqlConnection(conSt);
                 cons.Open();
-                string crt = $"UPDATE {t} SET mess = '{text}' WHERE id = {c_c}";
+                string crt = $"INSERT INTO {t}_chat (mess) VALUES ({text})";
                 MySqlCommand com = new MySqlCommand(crt, cons);
                 com.ExecuteNonQuery();
-                crt = $"SELECT mess FROM {t} WHERE id = {c_c}";
+                crt = $"SELECT id FROM {t}_chat WHERE id=(SELECT * FROM `table_name` WHERE id=(SELECT MAX(id) FROM 'table_name'))";
+                com = new MySqlCommand(crt, cons);
+                com.ExecuteNonQuery();
                 string txt = Convert.ToString(com.ExecuteScalar());
                 this.Dispatcher.Invoke((Action)(() =>
                 {

@@ -43,7 +43,7 @@
                     <Button Content="Назад" HorizontalAlignment="Left" Height="52" Margin="10,383,0,0" VerticalAlignment="Top" Width="141" FontSize="22" FontWeight="Bold" Click="BC3"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="w_game" Header="TabItem" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="54" Visibility="Visible">
+            <TabItem x:Name="w_game" Header="TabItem" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="54" Visibility="Collapsed">
                 <Grid x:Name="game" Background="#FFF1F1F1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="281*"/>
