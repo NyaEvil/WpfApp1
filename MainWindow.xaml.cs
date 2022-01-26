@@ -75,7 +75,10 @@ namespace WpfApp1
                 crt = $"INSERT INTO crt (g_name, g_pass) VALUES ('{nm}', '{pasw}')";
                 com = new MySqlCommand(crt, con);
                 com.ExecuteNonQuery();
-                crt = $"CREATE TABLE {nm} (id INTEGER AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, hp INTEGER, mana INTEGER, str INTEGER, skill TEXT, mess TEXT, PRIMARY KEY(id))";
+                crt = $"CREATE TABLE {nm} (id INTEGER AUTO_INCREMENT, name VARCHAR(255) NOT NULL UNIQUE, hp INTEGER, mana INTEGER, str INTEGER, skill TEXT, PRIMARY KEY(id))";
+                com = new MySqlCommand(crt, con);
+                com.ExecuteNonQuery();
+                crt = $"CREATE TABLE {nm}_chat (id INTEGER AUTO_INCREMENT, mess VARCHAR(255), PRIMARY KEY(id))";
                 com = new MySqlCommand(crt, con);
                 com.ExecuteNonQuery();
                 tb1.SelectedItem = w_game;
@@ -91,8 +94,10 @@ namespace WpfApp1
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
             var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            var path = System.IO.Path.GetDirectoryName(location);
-            string[] alf = Directory.GetFiles($"{path}/Toads");
+            var path = System.IO.Path.GetFullPath(location);
+            var path2 = System.IO.Path.Combine(path, "..\\..\\..\\.");
+            string parentDirectory = System.IO.Path.GetDirectoryName(path2);
+             string[] alf = Directory.GetFiles($"{parentDirectory}/Toads");
             try
             {
                 i++;
@@ -131,7 +136,7 @@ namespace WpfApp1
             string cls = t_class1.SelectionBoxItem.ToString();
             Toad you = new Toad(cls);
 
-            string cm = $"INSERT INTO {t} (name, hp, mana, str, skill, mess) VALUES ('{nm}', {you.hp}, {you.mana}, {you.str}, '{you.skill}', ' ')";
+            string cm = $"INSERT INTO {t} (name, hp, mana, str, skill) VALUES ('{nm}', {you.hp}, {you.mana}, {you.str}, '{you.skill}')";
             MySqlCommand com = new MySqlCommand(cm, con);
             com.ExecuteNonQuery();
             PREV.Visibility = Visibility.Collapsed;
@@ -228,26 +233,11 @@ namespace WpfApp1
             {
                 string text = t_chat.Text;
                 t_chat.Text = "";
-                this.Dispatcher.Invoke((Action)(() =>
-                {
-                    chat.Items.Add(text);
-                    if (chat.Items.Count > 14)
-                    {
-                        chat.Items.RemoveAt(0);
-                    }
-                }));
                 MySqlConnection cons = new MySqlConnection(conSt);
                 cons.Open();
-                string crt = $"UPDATE {t} SET mess = '{text}' WHERE id = {c_c}";
+                string crt = $"INSERT INTO {t}_chat (mess) VALUES ('{name_sh.Content} сказал:{text}')";
                 MySqlCommand com = new MySqlCommand(crt, cons);
                 com.ExecuteNonQuery();
-                crt = $"SELECT mess FROM {t} WHERE id = {c_c}";
-                string txt = Convert.ToString(com.ExecuteScalar());
-                this.Dispatcher.Invoke((Action)(() =>
-                {
-                    label.Content = txt;
-                    label_Copy.Content = c_c;
-                }));
             }
         }
 
@@ -257,36 +247,47 @@ namespace WpfApp1
             sql3.Open();
             MySqlConnection sql2 = new MySqlConnection(conSt);
             sql2.Open();
-            string crt = $"SELECT mess FROM {t}";
-            MySqlCommand com = new MySqlCommand(crt, sql3);
-            var read = com.ExecuteReader();
-            crt = $"SELECT COUNT(*) FROM {t}";
-            com = new MySqlCommand(crt, sql2);
-            var c = Convert.ToInt32(com.ExecuteScalar());
+            string crt = $"SELECT COUNT(*) FROM {t}_chat";
+            MySqlCommand com = new MySqlCommand(crt, sql2);
+            var c2 = Convert.ToInt32(com.ExecuteScalar());
+            var c_mess = c2 - Ctr.cn;
+            var read = getmes();
+            MySqlDataReader getmes()
+            {
+                if (c2 != Ctr.cn)
+                {
+                    crt = $"SELECT * FROM (SELECT * FROM {t}_chat ORDER BY id DESC LIMIT {c_mess}) t ORDER BY id";
+                    com = new MySqlCommand(crt, sql3);
+                    Ctr.cn = c2;
+                    var read1 = com.ExecuteReader();
+                    return read1;
+                } else
+                {
+                    return com.ExecuteReader();
+                }
+            }
             List<string> mes = new List<string>();
-            for (byte i =0; i<c; i++)
+            for (byte i =0; i<c_mess; i++)
             {
                 read.Read();
                 mes.Add(read.GetString("mess"));
             }
-            if (mes!=chats)
+            string[] mess= new string[c_mess];
+            mes.CopyTo(mess);
+            foreach (string i in mess)
             {
-                chats.Clear();
-                string[] mess= new string[20];
-                mes.CopyTo(mess);
-                foreach (string i in mess)
+                void send()
                 {
                     chats.Add(i);
-                    this.Dispatcher.Invoke((Action)(() =>
-                    {
-                        chat.Items.Add(i);
-                        if (chat.Items.Count > 14)
-                        {
-                            chat.Items.RemoveAt(0);
-                        }
-                    }));
+                    chat.Items.Add(i);
+                    chat.SelectedIndex = chat.Items.Count - 1;
+                    chat.UpdateLayout();
+                    chat.ScrollIntoView(chat.SelectedItem);
                 }
+                this.Dispatcher.Invoke(send);
             }
+
+
             sql2.Close();
             sql3.Close();
             g_chat(obj);
