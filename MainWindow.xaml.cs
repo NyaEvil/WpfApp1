@@ -31,6 +31,7 @@ namespace WpfApp1
         List<string> chats = new List<string>();
         string conSt = "server=nyaeviu7.beget.tech;user id=nyaeviu7_is31;persistsecurityinfo=True;database=nyaeviu7_is31;password=Testis31;allowuservariables=True";
         MySqlConnection con;
+        int c = 0;
 
         object obj = null;
         public MainWindow()
@@ -233,10 +234,6 @@ namespace WpfApp1
             {
                 string text = t_chat.Text;
                 t_chat.Text = "";
-                this.Dispatcher.Invoke((Action)(() =>
-                {
-                    chat.Items.Add(text);
-                }));
                 MySqlConnection cons = new MySqlConnection(conSt);
                 cons.Open();
                 string crt = $"INSERT INTO {t}_chat (mess) VALUES ({text})";
@@ -250,6 +247,7 @@ namespace WpfApp1
                 {
                     label.Content = txt;
                     label_Copy.Content = c_c;
+                    chat.Items.Add(text);
                 }));
             }
         }
@@ -260,21 +258,26 @@ namespace WpfApp1
             sql3.Open();
             MySqlConnection sql2 = new MySqlConnection(conSt);
             sql2.Open();
-            string crt = $"SELECT mess FROM {t}";
+            string crt = $"SELECT mess FROM {t}_chat";
             MySqlCommand com = new MySqlCommand(crt, sql3);
             var read = com.ExecuteReader();
-            crt = $"SELECT COUNT(*) FROM {t}";
+            crt = $"SELECT COUNT(*) FROM {t}_chat";
             com = new MySqlCommand(crt, sql2);
-            var c = Convert.ToInt32(com.ExecuteScalar());
+            var c2 = Convert.ToInt32(com.ExecuteScalar());
+            if (c2!=c)
+            {
+                for (int i = c2 - c; i <= c2; i++)
+                c = c2;
+            }
             List<string> mes = new List<string>();
             for (byte i =0; i<c; i++)
             {
                 read.Read();
+                
                 mes.Add(read.GetString("mess"));
             }
             if (mes!=chats)
             {
-                chats.Clear();
                 string[] mess= new string[20];
                 mes.CopyTo(mess);
                 foreach (string i in mess)
