@@ -31,6 +31,7 @@ namespace WpfApp1
         List<string> chats = new List<string>();
         string conSt = "server=nyaevil.beget.tech;user id=nyaevil_toad;persistsecurityinfo=True;database=nyaevil_toad;password=IWantYourGone12345!;allowuservariables=True";
         MySqlConnection con;
+        int self_id = 0;
 
         object obj = null;
         public MainWindow()
@@ -115,8 +116,10 @@ namespace WpfApp1
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             var location = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            var path = System.IO.Path.GetDirectoryName(location);
-            string[] alf = Directory.GetFiles($"{path}/Toads");
+            var path = System.IO.Path.GetFullPath(location);
+            var path2 = System.IO.Path.Combine(path, "..\\..\\..\\.");
+            string parentDirectory = System.IO.Path.GetDirectoryName(path2);
+            string[] alf = Directory.GetFiles($"{parentDirectory}/Toads");
             try
             {
                 i--;
@@ -139,6 +142,9 @@ namespace WpfApp1
             string cm = $"INSERT INTO {t} (name, hp, mana, str, skill) VALUES ('{nm}', {you.hp}, {you.mana}, {you.str}, '{you.skill}')";
             MySqlCommand com = new MySqlCommand(cm, con);
             com.ExecuteNonQuery();
+            cm = $"SELECT id FROM {t} WHERE name='{nm}'";
+            com = new MySqlCommand(cm, con);
+            self_id = Convert.ToInt32(com.ExecuteScalar());
             PREV.Visibility = Visibility.Collapsed;
             NEXT.Visibility = Visibility.Collapsed;
             t_name.Visibility = Visibility.Collapsed;
@@ -307,7 +313,24 @@ namespace WpfApp1
 
         private void hit_Click(object sender, RoutedEventArgs e)
         {
+            hit.Visibility = Visibility.Collapsed;
+            int i = 0;
+            foreach (var item in plars.Items)
+            {
+                int n = 0;
+                Button player = new Button();
+                player.Content = item;
+                plr_list.Items.Add(player);
+            }
+            plr_list.Items.RemoveAt(self_id - 1);
+            plr_list.AddHandler(Button.ClickEvent, new RoutedEventHandler(player_click));
+            void player_click(object send, RoutedEventArgs ee)
+            {
 
+                while ()
+            }
+            plr_list.Visibility = Visibility.Visible;
+            
         }
 
         private void def_Click(object sender, RoutedEventArgs e)
