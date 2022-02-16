@@ -7,29 +7,29 @@
         Title="ToadFight!" Height="720" Width="1280" ResizeMode="CanMinimize" Topmost="False" WindowStyle="ToolWindow" KeyDown="Window_KeyDown" >
     <Grid Width="1280" Margin="0,0,-6,1" Background="Red">
 
-        <Label Content="TOADFIGHT!" HorizontalAlignment="Center" Height="78" VerticalAlignment="Top" Width="471" FontSize="72" FontFamily="Haettenschweiler" FontWeight="Normal" Background="#FFFB0808" HorizontalContentAlignment="Center"/>
-        <TabControl x:Name="tb1" HorizontalAlignment="Center" Height="480" VerticalAlignment="Center" Width="902" Background="Red">
+        <Label Content="TOADFIGHT!" HorizontalAlignment="Center" Height="78" VerticalAlignment="Top" Width="471" FontSize="72" FontFamily="Haettenschweiler" FontWeight="Bold" Background="#FFFB0808" HorizontalContentAlignment="Center" Margin="409,0,400,0"/>
+        <TabControl x:Name="tb1" HorizontalAlignment="Center" Height="575" VerticalAlignment="Center" Width="1082" Background="Red" Margin="106,83,92,33" BorderThickness="0">
             <TabItem x:Name="main" Header="TabItem" Visibility="Collapsed">
                 <Grid>
-                    <Button Content="Создать игру" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Height="70" FontSize="36" Click="Button_Click" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" Background="Black" BorderBrush="#FFB2B2B2" Foreground="#FFE8FF00" Margin="290,34,0,0"/>
-                    <Button Content="Присоединиться" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Height="70" FontSize="36" FontWeight="Bold" Background="Black" Foreground="#FFE8FF00" Click="Button_Click_1" Margin="290,139,0,0"/>
-                    <Button Content="ВЫЙТИ" HorizontalAlignment="Left" VerticalAlignment="Top" Width="320" Margin="290,321,0,0" Height="70" Background="Black" Foreground="Yellow" FontSize="22" FontWeight="Bold" Click="Button_Click_2"/>
+                    <Button Content="Создать игру" HorizontalAlignment="Center" VerticalAlignment="Top" Width="320" Height="70" FontSize="36" Click="Button_Click" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" Background="Black" BorderBrush="#FFB2B2B2" Foreground="#FFE8FF00" Margin="372,34,384,0"/>
+                    <Button Content="Присоединиться" HorizontalAlignment="Center" VerticalAlignment="Top" Width="320" Height="70" FontSize="36" FontWeight="Bold" Background="Black" Foreground="#FFE8FF00" Click="Button_Click_1" Margin="372,139,384,0"/>
+                    <Button Content="ВЫЙТИ" HorizontalAlignment="Center" VerticalAlignment="Top" Width="320" Margin="372,321,384,0" Height="70" Background="Black" Foreground="Yellow" FontSize="22" FontWeight="Bold" Click="Button_Click_2"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="create" Header="TabItem" Height="22" VerticalAlignment="Top" Visibility="Collapsed">
+            <TabItem x:Name="create" Header="TabItem" Height="22" VerticalAlignment="Top" Visibility="collapsed">
                 <Grid x:Name="gr_crt" Background="Red" Margin="0,16,0,-128">
-                    <Label x:Name="cr_name" Content="Название игры" HorizontalAlignment="Left" VerticalAlignment="Top" Height="95" Width="463" Margin="2,0,0,0" FontWeight="Bold" FontSize="16" Background="Red" Foreground="#FFE7FD0B"/>
-                    <Label x:Name="cr_pass" Content="Пароль" HorizontalAlignment="Left" VerticalAlignment="Top" Height="94" Width="463" Margin="2,108,0,0" FontWeight="Bold" FontSize="16" Foreground="#FFFFF300"/>
-                    <Label x:Name="num_pls" Content="Количество игроков" HorizontalAlignment="Left" VerticalAlignment="Top" Height="94" Width="499" Margin="2,216,0,0" FontWeight="Bold" FontSize="16" Foreground="#FFFFF300"/>
-                    <Button Content="Начать игру!" HorizontalAlignment="Center" Width="551" Margin="194,361,151,127" FontWeight="Bold" Click="crt" FontSize="22" />
+                    <Label x:Name="cr_name" Content="Название игры" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="95" Width="463" Margin="2,0,0,0" FontWeight="Bold" FontSize="16" Background="Red" Foreground="#FFE7FD0B"/>
+                    <Label x:Name="cr_pass" Content="Пароль" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="94" Width="463" Margin="2,108,0,0" FontWeight="Bold" FontSize="16" Foreground="#FFFFF300"/>
+                    <Label x:Name="num_pls" Content="Количество игроков" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top" Height="94" Width="499" Margin="2,216,0,0" FontWeight="Bold" FontSize="16" Foreground="#FFFFF300"/>
+                    <Button Content="Начать игру!" HorizontalAlignment="Center" VerticalContentAlignment="Center" Width="551" Margin="285,361,242,177" FontWeight="Bold" Click="crt" FontSize="22" />
                     <TextBox x:Name="name" HorizontalAlignment="Left" Height="60" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="338" Margin="548,10,0,0" FontWeight="Bold"/>
-                    <TextBox x:Name="pass" HorizontalAlignment="Left" Height="58" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="338" Margin="548,108,0,0" FontWeight="Bold"/>
-                    <ComboBox x:Name="plrs" HorizontalAlignment="Left" VerticalAlignment="Top" Width="338" Margin="548,216,0,0" Height="57">
+                    <TextBox x:Name="pass" HorizontalAlignment="Left" Height="58" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="338" Margin="548,126,0,0" FontWeight="Bold"/>
+                    <ComboBox x:Name="plrs" HorizontalAlignment="Left" VerticalAlignment="Top" Width="338" Margin="548,240,0,0" Height="56">
                         <Button Content="2"/>
                         <Button Content="3"/>
                         <Button Content="4"/>
                     </ComboBox>
-                    <Button Content="Назад" HorizontalAlignment="Left" Height="52" Margin="10,383,0,0" VerticalAlignment="Top" Width="141" FontSize="22" FontWeight="Bold" Click="BC3"/>
+                    <Button Content="Назад" HorizontalAlignment="Left" Height="69" Margin="10,383,0,0" VerticalAlignment="Top" Width="177" FontSize="22" FontWeight="Bold" Click="BC3"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="join" Header="TabItem" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="54" Margin="1,0,-1,0" Visibility="Collapsed">
@@ -39,11 +39,11 @@
                     <Label x:Name="j_pass" Content="Пароль" HorizontalAlignment="Left" VerticalAlignment="Top" Height="59" Width="307" Margin="163,271,0,0" FontWeight="Bold" FontSize="16" Background="Red" Foreground="Yellow"/>
                     <TextBox x:Name="join_name" HorizontalAlignment="Left" Height="58" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="226" Margin="524,205,0,0"/>
                     <TextBox x:Name="join_pass" HorizontalAlignment="Left" Height="59" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="226" Margin="524,271,0,0"/>
-                    <Button Content="Присоединиться!" HorizontalAlignment="Center" Width="393" Margin="256,388,247,10" FontWeight="Bold" FontSize="22" Click="Button_Click_5" />
-                    <Button Content="Назад" HorizontalAlignment="Left" Height="52" Margin="10,383,0,0" VerticalAlignment="Top" Width="141" FontSize="22" FontWeight="Bold" Click="BC3"/>
+                    <Button Content="Присоединиться!" HorizontalAlignment="Center" Width="393" Margin="347,388,338,64" FontWeight="Bold" FontSize="22" Click="Button_Click_5" />
+                    <Button Content="Назад" HorizontalAlignment="Left" Height="72" Margin="43,388,0,0" VerticalAlignment="Top" Width="168" FontSize="22" FontWeight="Bold" Click="BC3"/>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="w_game" Header="TabItem" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="54" Visibility="Collapsed">
+            <TabItem x:Name="w_game" Header="TabItem" HorizontalAlignment="Left" Height="22" VerticalAlignment="Top" Width="54" Visibility="Visible">
                 <Grid x:Name="game" Background="#FFF1F1F1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="281*"/>
@@ -56,31 +56,33 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <Image x:Name="toad_im" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="270" Grid.Column="1" Margin="15,1,0,0"/>
-                    <Button x:Name="NEXT" Content="NEXT" Grid.Column="1" HorizontalAlignment="Left" Height="35" Margin="289,117,0,0" VerticalAlignment="Top" Width="68" Click="Button_Click_3" Grid.ColumnSpan="2"/>
-                    <Button x:Name="PREV" Content="PREV" HorizontalAlignment="Left" Height="35" Margin="241,117,0,0" VerticalAlignment="Top" Width="68" Click="Button_Click_4" Grid.ColumnSpan="2"/>
-                    <Label x:Name="t_name" Content="Имя жабы" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="24,10,0,0" VerticalAlignment="Top" Width="80" Grid.Row="1"/>
-                    <Label x:Name="t_class" Content="Класс жабы" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="24,43,0,0" VerticalAlignment="Top" Width="80" Grid.Row="1"/>
-                    <Button x:Name="start" Content="Создать персонажа!" Grid.Column="1" HorizontalAlignment="Left" Height="55" Margin="15,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="270" Click="start_Click"/>
-                    <TextBox x:Name="t_name1" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="134,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="80"/>
-                    <ComboBox x:Name="t_class1" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="134,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80">
+                    <Image x:Name="toad_im" HorizontalAlignment="Left" Height="270" VerticalAlignment="Top" Width="270" Grid.Column="1" Margin="45,1,0,0"/>
+                    <Button x:Name="NEXT" Content="NEXT" Grid.Column="2" HorizontalAlignment="Left" Height="35" Margin="0,117,0,0" VerticalAlignment="Top" Width="68" Click="Button_Click_3"/>
+                    <Button x:Name="PREV" Content="PREV" HorizontalAlignment="Left" Height="35" Margin="291,117,0,0" VerticalAlignment="Top" Width="68" Click="Button_Click_4"/>
+                    <Label x:Name="t_name" Content="Имя жабы" FontSize="15" Grid.Column="1" HorizontalAlignment="Left" Height="33" Margin="24,10,0,0" VerticalAlignment="Top" Width="107" Grid.Row="1"/>
+                    <Label x:Name="t_class" Content="Класс жабы" FontSize="15" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="24,43,0,0" VerticalAlignment="Top" Width="107" Grid.Row="1"/>
+                    <Button x:Name="start" Content="Создать персонажа!" Grid.Column="1" HorizontalAlignment="Left" Height="55" Margin="15,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="270" Click="start_Click" Visibility="Collapsed"/>
+                    <TextBox x:Name="t_name1" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="152,10,0,0" Grid.Row="1" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="80"/>
+                    <ComboBox x:Name="t_class1" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="152,43,0,0" Grid.Row="1" VerticalAlignment="Top" Width="80">
                         <Button Content="Маг"/>
                         <Button Content="Воин"/>
                         <Button Content="Некромант"/>
                     </ComboBox>
                     <ListView x:Name="plars" HorizontalAlignment="Left" Height="261" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Visibility="Hidden" >
-                        
+
                     </ListView>
-                    <ListView x:Name="chat" HorizontalAlignment="Left" Height="225" Margin="62,179,0,0" VerticalAlignment="Top" Width="226" Grid.Column="2" Grid.RowSpan="3" Visibility="Visible">
+                    <ListView x:Name="chat" HorizontalAlignment="Left" Height="225" Margin="10,179,0,0" VerticalAlignment="Top" Width="339" Grid.Column="2" Grid.RowSpan="2" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Disabled">
                     </ListView>
                     <Label x:Name="name_sh" Content="Label" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Height="28" Width="190" Visibility="Hidden"/>
                     <Label x:Name="class_sh" Content="Label" HorizontalAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Grid.Column="1" Grid.Row="1" Height="28" Width="190" Margin="55,38,54,0" Visibility="Hidden"/>
-                    <TextBox x:Name="t_chat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="226" Grid.Column="2" Margin="62,42,0,0" Grid.Row="2" KeyDown="t_chat_KeyDown"/>
+                    <TextBox x:Name="t_chat" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="339" Grid.Column="2" Margin="10,67,0,0" Grid.Row="1" KeyDown="t_chat_KeyDown" Visibility="Collapsed"/>
+                    <Button x:Name="hit" Content="Атака" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="131" Grid.Column="1" Margin="24,28,0,0" Grid.Row="2" Height="57" Click="hit_Click" Visibility="Collapsed"/>
+                    <Button x:Name="def" Content="Защита" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Grid.Column="1" Margin="205,28,0,0" Grid.Row="2" Height="57" Click="def_Click" Visibility="Collapsed"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Height="45" Margin="779,10,0,0" VerticalAlignment="Top" Width="491"/>
-        <Label x:Name="label_Copy" Content="Label" HorizontalAlignment="Left" Height="45" Margin="779,55,0,0" VerticalAlignment="Top" Width="491"/>
+        <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Height="45" Margin="914,10,-125,0" VerticalAlignment="Top" Width="491"/>
+        <Label x:Name="label_Copy" Content="Label" HorizontalAlignment="Left" Height="46" Margin="914,60,-125,0" VerticalAlignment="Top" Width="491"/>
 
     </Grid>
 </Window>

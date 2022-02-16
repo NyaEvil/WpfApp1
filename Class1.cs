@@ -27,26 +27,35 @@ namespace WpfApp1
 
         public Toad(string cls)
         {
-            if (cls == "Воин") {
+            if (cls == "Воин")
+            {
 
                 this.hp = 150;
                 this.mana = 50;
                 this.str = 15;
                 this.skill = "Клич!";
                 this.clas = cls;
-            } else if (cls == "Маг") {
+            }
+            else if (cls == "Маг")
+            {
                 this.hp = 90;
                 this.mana = 120;
                 this.str = 10;
                 this.skill = "Фаерболл!";
-            } else if (cls == "Некромант") { 
+            }
+            else if (cls == "Некромант")
+            {
                 this.hp = 100;
                 this.mana = 100;
                 this.str = 7;
                 this.skill = "Умерщвление!";
             }
-            
+
         }
     }
 
+    public static class Ctr
+    {
+        public static int cn;
+    }
 }

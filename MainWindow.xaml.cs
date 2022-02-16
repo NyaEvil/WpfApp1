@@ -31,7 +31,6 @@ namespace WpfApp1
         List<string> chats = new List<string>();
         string conSt = "server=nyaevil.beget.tech;user id=nyaevil_toad;persistsecurityinfo=True;database=nyaevil_toad;password=IWantYourGone12345!;allowuservariables=True";
         MySqlConnection con;
-        int c = 0;
 
         object obj = null;
         public MainWindow()
@@ -148,11 +147,14 @@ namespace WpfApp1
             t_class1.Visibility = Visibility.Collapsed;
             start.Visibility = Visibility.Collapsed;
             chat.Visibility = Visibility.Visible;
+            t_chat.Visibility = Visibility.Visible;
             plars.Visibility = Visibility.Visible;
             name_sh.Content = nm;
             class_sh.Content = cls;
             name_sh.Visibility = Visibility.Visible;
             class_sh.Visibility = Visibility.Visible;
+            hit.Visibility = Visibility.Visible;
+            def.Visibility = Visibility.Visible;
             Thread th = new Thread(() => chk());
             th.Start();
         }
@@ -236,19 +238,9 @@ namespace WpfApp1
                 t_chat.Text = "";
                 MySqlConnection cons = new MySqlConnection(conSt);
                 cons.Open();
-                string crt = $"INSERT INTO {t}_chat (mess) VALUES ({text})";
+                string crt = $"INSERT INTO {t}_chat (mess) VALUES ('{name_sh.Content} сказал:{text}')";
                 MySqlCommand com = new MySqlCommand(crt, cons);
                 com.ExecuteNonQuery();
-                crt = $"SELECT id FROM {t}_chat WHERE id=(SELECT * FROM `table_name` WHERE id=(SELECT MAX(id) FROM 'table_name'))";
-                com = new MySqlCommand(crt, cons);
-                com.ExecuteNonQuery();
-                string txt = Convert.ToString(com.ExecuteScalar());
-                this.Dispatcher.Invoke((Action)(() =>
-                {
-                    label.Content = txt;
-                    label_Copy.Content = c_c;
-                    chat.Items.Add(text);
-                }));
             }
         }
 
@@ -258,41 +250,47 @@ namespace WpfApp1
             sql3.Open();
             MySqlConnection sql2 = new MySqlConnection(conSt);
             sql2.Open();
-            string crt = $"SELECT mess FROM {t}_chat";
-            MySqlCommand com = new MySqlCommand(crt, sql3);
-            var read = com.ExecuteReader();
-            crt = $"SELECT COUNT(*) FROM {t}_chat";
-            com = new MySqlCommand(crt, sql2);
+            string crt = $"SELECT COUNT(*) FROM {t}_chat";
+            MySqlCommand com = new MySqlCommand(crt, sql2);
             var c2 = Convert.ToInt32(com.ExecuteScalar());
-            if (c2!=c)
+            var c_mess = c2 - Ctr.cn;
+            var read = getmes();
+            MySqlDataReader getmes()
             {
-                for (int i = c2 - c; i <= c2; i++)
-                c = c2;
-            }
-            List<string> mes = new List<string>();
-            for (byte i =0; i<c; i++)
-            {
-                read.Read();
-                
-                mes.Add(read.GetString("mess"));
-            }
-            if (mes!=chats)
-            {
-                string[] mess= new string[20];
-                mes.CopyTo(mess);
-                foreach (string i in mess)
+                if (c2 != Ctr.cn)
                 {
-                    chats.Add(i);
-                    this.Dispatcher.Invoke((Action)(() =>
-                    {
-                        chat.Items.Add(i);
-                        if (chat.Items.Count > 14)
-                        {
-                            chat.Items.RemoveAt(0);
-                        }
-                    }));
+                    crt = $"SELECT * FROM (SELECT * FROM {t}_chat ORDER BY id DESC LIMIT {c_mess}) t ORDER BY id";
+                    com = new MySqlCommand(crt, sql3);
+                    Ctr.cn = c2;
+                    var read1 = com.ExecuteReader();
+                    return read1;
+                } else
+                {
+                    return com.ExecuteReader();
                 }
             }
+            List<string> mes = new List<string>();
+            for (byte i =0; i<c_mess; i++)
+            {
+                read.Read();
+                mes.Add(read.GetString("mess"));
+            }
+            string[] mess= new string[c_mess];
+            mes.CopyTo(mess);
+            foreach (string i in mess)
+            {
+                void send()
+                {
+                    chats.Add(i);
+                    chat.Items.Add(i);
+                    chat.SelectedIndex = chat.Items.Count - 1;
+                    chat.UpdateLayout();
+                    chat.ScrollIntoView(chat.SelectedItem);
+                }
+                this.Dispatcher.Invoke(send);
+            }
+
+
             sql2.Close();
             sql3.Close();
             g_chat(obj);
@@ -305,6 +303,16 @@ namespace WpfApp1
                 this.Close();
                 con.Close();
             }
+        }
+
+        private void hit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void def_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
