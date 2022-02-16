@@ -29,7 +29,7 @@ namespace WpfApp1
         int ct = 0;
         int c_c = 0;
         List<string> chats = new List<string>();
-        string conSt = "server=nyaeviu7.beget.tech;user id=nyaeviu7_is31;persistsecurityinfo=True;database=nyaeviu7_is31;password=Testis31;allowuservariables=True";
+        string conSt = "server=nyaevil.beget.tech;user id=nyaevil_toad;persistsecurityinfo=True;database=nyaevil_toad;password=IWantYourGone12345!;allowuservariables=True";
         MySqlConnection con;
         int c = 0;
 
