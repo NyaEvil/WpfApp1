@@ -25,6 +25,7 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         public string t;
+        public string t_nm;
         int i = 0;
         int ct = 0;
         int c_c = 0;
@@ -136,6 +137,7 @@ namespace WpfApp1
         private void start_Click(object sender, RoutedEventArgs e)
         {
             string nm = t_name1.Text;
+            t_nm = nm;
             string cls = t_class1.SelectionBoxItem.ToString();
             Toad you = new Toad(cls);
 
@@ -155,6 +157,7 @@ namespace WpfApp1
             chat.Visibility = Visibility.Visible;
             t_chat.Visibility = Visibility.Visible;
             plars.Visibility = Visibility.Visible;
+            plars_name.Visibility = Visibility.Visible;
             name_sh.Content = nm;
             class_sh.Content = cls;
             name_sh.Visibility = Visibility.Visible;
@@ -223,7 +226,8 @@ namespace WpfApp1
                 {
                     this.Dispatcher.Invoke((Action)(() =>
                     {
-                        plars.Items.Add(names[id]+" hp: "+hps[id]+" mana: "+manas[id]+" strength: "+strs[id]);
+                        plars.Items.Add(" HP: "+hps[id]+" Mana: "+manas[id]+" STR: "+strs[id]);
+                        plars_name.Items.Add(names[id]);
                     }));
                 }
                 sql.Close();
@@ -315,27 +319,34 @@ namespace WpfApp1
         {
             hit.Visibility = Visibility.Collapsed;
             int i = 0;
-            foreach (var item in plars.Items)
+            foreach (var item in plars_name.Items)
             {
                 int n = 0;
                 Button player = new Button();
+                player.Name = item.ToString();
                 player.Content = item;
+                player.AddHandler(Button.ClickEvent, new RoutedEventHandler(player_click));
                 plr_list.Items.Add(player);
             }
             plr_list.Items.RemoveAt(self_id - 1);
-            plr_list.AddHandler(Button.ClickEvent, new RoutedEventHandler(player_click));
-            void player_click(object send, RoutedEventArgs ee)
-            {
-
-                while ()
-            }
             plr_list.Visibility = Visibility.Visible;
-            
         }
 
         private void def_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+        public void player_click(object send, RoutedEventArgs ee)
+        {
+            MySqlConnection sql = new MySqlConnection(conSt);
+            sql.Open();
+            string crt = $"SELECT hp FROM {t} WHERE name='{Content.ToString()}'";
+            Console.WriteLine(this.Content.ToString());
+            MySqlCommand com = new MySqlCommand(crt, sql);
+            int hp = Convert.ToInt32(com.ExecuteNonQuery());
+            label.Content = hp;
+        }
     }
+
 }

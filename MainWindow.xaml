@@ -68,7 +68,7 @@
                         <Button Content="Воин"/>
                         <Button Content="Некромант"/>
                     </ComboBox>
-                    <ListView x:Name="plars" HorizontalAlignment="Left" Height="261" Margin="10,10,0,0" VerticalAlignment="Top" Width="260" Visibility="Hidden" >
+                    <ListView x:Name="plars" HorizontalAlignment="Left" Height="261" Margin="76,10,0,0" VerticalAlignment="Top" Width="194" Visibility="Hidden" >
 
                     </ListView>
                     <ListView x:Name="chat" HorizontalAlignment="Left" Height="225" Margin="10,179,0,0" VerticalAlignment="Top" Width="339" Grid.Column="2" Grid.RowSpan="2" Visibility="Collapsed" ScrollViewer.VerticalScrollBarVisibility="Disabled">
@@ -79,6 +79,7 @@
                     <Button x:Name="hit" Content="Атака" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="131" Grid.Column="1" Margin="24,28,0,0" Grid.Row="2" Height="57" Click="hit_Click" Visibility="Collapsed"/>
                     <Button x:Name="def" Content="Защита" FontSize="20" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Grid.Column="1" Margin="205,28,0,0" Grid.Row="2" Height="57" Click="def_Click" Visibility="Collapsed"/>
                     <ListBox x:Name ="l" Grid.Column="2" HorizontalAlignment="Left" Height="182" Margin="84,23,0,0" VerticalAlignment="Top" Width="186"/>
+                    <ListView x:Name="plars_name" HorizontalAlignment="Left" Height="261" Margin="10,10,0,0" VerticalAlignment="Top" Width="61" Visibility="Hidden" />
 
                 </Grid>
             </TabItem>
